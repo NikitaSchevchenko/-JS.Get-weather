@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./src/index.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Weather map</h1>
+    <div class="container">
+        <div class="cityname-container">
+            <label for="cityname">City name</label>
+            <input type="text" id="cityname" name="cityname">
+        </div>
+        <div class="cityid-container">
+            <label for="cityid">City ID</label>
+            <input type="text" id="cityid" name="cityid">
+        </div>
+        <div class="searchmetdod-chooser">
+            <div class="cityname-chooser">
+                <label for="citybyname">City name</label>
+                <input type="radio" id="citybyname" name="searchmethod" value="Cityname" checked>
+            </div>
+            <div class="cityid-chooser">
+                <label for="citybyid">City ID</label>
+                <input type="radio" id="citybyid" name="searchmethod" value="Cityid">
+            </div>
+        </div>
+        <div class="outputdata">
+            <div class="temperature-container">
+                <div>Temperature</div>
+                <div class="temperature-data"></div>
+            </div>
+            <div class="windspeed-container">
+                <div>Wind Speed</div>
+                <div class="windspeed-data"></div>
+            </div>
+            <div class="humidity-container">
+                <div>Humidity</div>
+                <div class="humidity-data"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="submit">Weather</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>
