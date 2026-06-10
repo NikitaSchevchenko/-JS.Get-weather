@@ -9,10 +9,8 @@ const windSpeedDataContainer = document.querySelector(
 const humidityDataContainer = document.querySelector(
     ".humidity-container > .humidity-data"
 );
-
-const cityIdContainer = document.querySelector(".cityid-container > input");
-
 const cityNameContainer = document.querySelector(".cityname-container > input");
+const cityIdContainer = document.querySelector(".cityid-container > input");
 
 function getWeatherData(cityName, cityId) {
     let url;
@@ -54,8 +52,8 @@ async function showWeather() {
         const { temperature, windSpeed, humidity } = await getWeatherData(
             cityName
         );
-        temperatureDataContainer.textContent = temperature;
-        windSpeedDataContainer.textContent = windSpeed;
+        temperatureDataContainer.textContent = temperature + "C";
+        windSpeedDataContainer.textContent = windSpeed + "m/s";
         humidityDataContainer.textContent = humidity;
     } else if (inputType === "citybyid") {
         const cityId = cityIdContainer.value;
@@ -63,8 +61,8 @@ async function showWeather() {
             null,
             cityId
         );
-        temperatureDataContainer.textContent = temperature;
-        windSpeedDataContainer.textContent = windSpeed;
+        temperatureDataContainer.textContent = temperature + "C";
+        windSpeedDataContainer.textContent = windSpeed + "m/s";
         humidityDataContainer.textContent = humidity;
     }
 }
@@ -73,6 +71,8 @@ function resetForm() {
     const cityBynameChooser = document.querySelector(
         ".cityname-chooser > input"
     );
+    cityIdContainer.disabled = true;
+    cityNameContainer.disabled = false;
     cityBynameChooser.checked = true;
     cityNameContainer.value = "";
     cityIdContainer.value = "";
@@ -81,8 +81,28 @@ function resetForm() {
     humidityDataContainer.textContent = "";
 }
 
+const searchmetdodRadioButtons = document.querySelectorAll(
+    ".searchmetdod-chooser  input"
+);
+searchmetdodRadioButtons.forEach((radioButton) => {
+    radioButton.addEventListener("change", (event) => {
+        const radioId = event.target.id;
+        if (radioId === "citybyname") {
+            cityIdContainer.disabled = true;
+            cityIdContainer.value = "";
+            cityNameContainer.disabled = false;
+        }
+        else if(radioId === "citybyid"){
+            cityNameContainer.disabled = true;
+            cityNameContainer.value = "";
+            cityIdContainer.disabled = false;
+        }
+    });
+});
+
 const getWeatherButton = document.querySelector("button[type = 'submit']");
 const cancelButton = document.querySelector("button[type = 'reset']");
 
+resetForm();
 getWeatherButton.addEventListener("click", showWeather);
 cancelButton.addEventListener("click", resetForm);
